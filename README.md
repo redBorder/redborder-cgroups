@@ -8,7 +8,7 @@ The redborder-cgroups package provides tools and scripts for configuring cgroups
 
 To install redborder-cgroups, follow these steps:
 
-1. Compile RPM package using redborder mock file.
+1. Compile RPM package using redborder mock file or `yum install redborder-cgroups` (you will need redborder repo ->  http://repo.redborder.com/) 
 
 2. Install the package using the following command:
 
