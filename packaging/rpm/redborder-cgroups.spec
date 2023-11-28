@@ -41,6 +41,6 @@ systemctl enable redborder-cgroups
 %doc
 
 %changelog
-* Mon Sep 25 2023 - Miguel Álvarez <malvarez@redborder.com> - 0.0.1-1
+* Tue Sep 28 2023 - Miguel Álvarez <malvarez@redborder.com> - 0.0.1-1
 - Initial spec version
 

@@ -15,7 +15,7 @@
 
 # rpm generated trash
 
-/packaging/rpm/*.rpm
+/packaging/rpm/pkgs/*
 /packaging/rpm/SOURCES/*
 
 # Ignore Byebug command history file.
