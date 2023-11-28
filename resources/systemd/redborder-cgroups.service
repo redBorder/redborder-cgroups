@@ -1,0 +1,10 @@
+[Unit]
+Description=Configure Cgroups on Boot
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/redborder/bin/rb_configure_cgroups.sh
+
+[Install]
+WantedBy=multi-user.target
