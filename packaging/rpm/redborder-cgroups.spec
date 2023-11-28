@@ -22,9 +22,8 @@ mkdir -p %{buildroot}/usr/lib/redborder/scripts/
 mkdir -p %{buildroot}/etc/systemd/system/
 
 install -D -m 0644 resources/systemd/* %{buildroot}/etc/systemd/system/
-
-cp resources/bin/* %{buildroot}/usr/lib/redborder/bin
-cp resources/scripts/* %{buildroot}/usr/lib/redborder/scripts
+install -m 0755 resources/bin/* %{buildroot}/usr/lib/redborder/bin/
+install -m 0755 resources/scripts/* %{buildroot}/usr/lib/redborder/scripts/
 
 %pre
 
@@ -37,6 +36,8 @@ systemctl enable redborder-cgroups
 %dir %attr(0755,root,root) /usr/lib/redborder/scripts
 %dir %attr(0755,root,root) /usr/lib/redborder/bin
 %config(noreplace) %attr(0644,root,root) /etc/systemd/system/redborder-cgroups.service
+/usr/lib/redborder/bin/*
+/usr/lib/redborder/scripts/*
 %doc
 
 %changelog
