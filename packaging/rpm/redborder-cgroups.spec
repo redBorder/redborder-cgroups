@@ -19,6 +19,7 @@ Source0:    %{name}-%{version}.tar.gz
 %install
 mkdir -p %{buildroot}/usr/lib/redborder/bin/
 mkdir -p %{buildroot}/usr/lib/redborder/scripts/
+mkdir -p %{buildroot}/etc/systemd/system/
 
 install -D -m 0644 resources/systemd/* %{buildroot}/etc/systemd/system/
 

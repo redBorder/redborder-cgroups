@@ -23,3 +23,28 @@
 2023-11-28 14:06:40,357 - Finish: build phase for redborder-cgroups-0.0.1-1.el9.rb.src.rpm
 2023-11-28 14:06:40,359 - Start: clean chroot
 2023-11-28 14:06:42,013 - Finish: clean chroot
+2023-11-28 14:08:13,810 - Mock Version: 2.17
+2023-11-28 14:08:16,572 - Start: dnf update
+2023-11-28 14:08:22,289 - Finish: dnf update
+2023-11-28 14:08:22,295 - Finish: chroot init
+2023-11-28 14:08:22,299 - Start: buildsrpm
+2023-11-28 14:08:22,304 - Start: rpmbuild -bs
+2023-11-28 14:08:22,582 - Finish: rpmbuild -bs
+2023-11-28 14:08:22,584 - Finish: buildsrpm
+2023-11-28 14:08:22,586 - Start: clean chroot
+2023-11-28 14:08:24,167 - Finish: clean chroot
+2023-11-28 14:08:24,168 - Finish: run
+2023-11-28 14:08:27,357 - Mock Version: 2.17
+2023-11-28 14:08:29,624 - Start: dnf update
+2023-11-28 14:08:35,118 - Finish: dnf update
+2023-11-28 14:08:35,124 - Finish: chroot init
+2023-11-28 14:08:35,126 - Start: build phase for redborder-cgroups-0.0.1-1.el9.rb.src.rpm
+2023-11-28 14:08:35,128 - Start: build setup for redborder-cgroups-0.0.1-1.el9.rb.src.rpm
+2023-11-28 14:08:39,022 - Finish: build setup for redborder-cgroups-0.0.1-1.el9.rb.src.rpm
+2023-11-28 14:08:39,023 - Start: Outputting list of installed packages
+2023-11-28 14:08:39,560 - Finish: Outputting list of installed packages
+2023-11-28 14:08:39,560 - Start: rpmbuild redborder-cgroups-0.0.1-1.el9.rb.src.rpm
+2023-11-28 14:08:40,023 - Finish: rpmbuild redborder-cgroups-0.0.1-1.el9.rb.src.rpm
+2023-11-28 14:08:40,023 - Finish: build phase for redborder-cgroups-0.0.1-1.el9.rb.src.rpm
+2023-11-28 14:08:40,025 - Start: clean chroot
+2023-11-28 14:08:41,543 - Finish: clean chroot
