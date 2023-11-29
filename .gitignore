@@ -13,6 +13,11 @@
 # Used by dotenv library to load environment variables.
 # .env
 
+# rpm generated trash
+
+/packaging/rpm/pkgs/*
+/packaging/rpm/SOURCES/*
+
 # Ignore Byebug command history file.
 .byebug_history
 
