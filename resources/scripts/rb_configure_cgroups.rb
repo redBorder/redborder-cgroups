@@ -98,6 +98,18 @@ module RedBorder
 
   # Module to check and assign cgroups to services
   module Checker
+    def self.check_memservices_cgroups
+      #TODO get hostname in a better way if needed
+      hostname = Socket.gethostname.split('.')[0]
+      #TODO: get node in a better way
+      memory_services=`knife node show #{hostname} -l -F json | jq '.default.redborder.memory_services | keys[]'`.chomp.lines
+      memory_services.all? do |s|
+        cgroup = `systemctl show -p ControlGroup #{s}`.gsub('ControlGroup=','').chomp
+        s = s.delete("\",-").chomp
+        cgroup.empty? || cgroup.include?("redborder-#{s}.slice") #assigned cgroup should cointain redborder-webui ie, else return false
+      end
+    end
+
     def self.check_units(cgroup, services)
       services.each do |srv, data|
         next unless data['memory'] > 0
