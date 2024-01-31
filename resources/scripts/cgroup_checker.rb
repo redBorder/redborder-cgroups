@@ -13,6 +13,6 @@ module RedBorder
     end
 end
 
-RedBorder::Checker.check_memservices_cgroups()
+#RedBorder::Checker.check_memservices_cgroups()
 
 
