@@ -5,7 +5,7 @@ module RedBorder
             hostname = Socket.gethostname.split('.')[0]
             memory_services=`knife node show #{hostname} -l -F json | jq '.default.redborder.memory_services | keys[]'`.chomp.lines
             active_services=memory_services.select do |s|
-                `systemctl is-active #{s}` == 'active'
+                `systemctl is-active #{s}`.chomp == 'active'
             end
             active_services.all? do |s|
               cgroup = `systemctl show -p ControlGroup #{s}`.gsub('ControlGroup=','').chomp
