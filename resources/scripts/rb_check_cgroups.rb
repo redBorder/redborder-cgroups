@@ -10,7 +10,7 @@ module RedBorder
             active_services.all? do |s|
               cgroup = `systemctl show -p ControlGroup #{s}`.gsub('ControlGroup=','').chomp
               s = s.delete("\",-").chomp
-              cgroup.include?("redborder-#{s}.slice") #assigned cgroup should cointain redborder-webui ie, else false
+              cgroup.include?("redborder-#{s}.slice") #assigned cgroup should cointain redborder-webui.slice ie, else false
             end
         end
     end
