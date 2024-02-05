@@ -1,6 +1,6 @@
 Name:       redborder-cgroups
-Version:    0.0.1
-Release:    1%{?dist}
+Version: %{__version}
+Release: %{__release}%{?dist}
 BuildArch:  noarch
 Summary:    redborder-cgroups package for configuring cgroup in redborder environments
 
