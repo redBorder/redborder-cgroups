@@ -17,4 +17,4 @@
 
 source /etc/profile.d/rvm.sh
 
-/usr/lib/redborder/scripts/rb_update_cgroups.rb $*
+/usr/lib/redborder/scripts/rb_check_cgroups.rb $*
