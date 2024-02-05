@@ -23,6 +23,7 @@ To install redborder-cgroups, follow these steps:
 Create a file in /etc/cgroup.conf with the services in yaml format, for more info take a look at [Cgroup Cookbook](https://github.com/redBorder/cookbook-rb-cgroup)
 
 Then start `rb_configure_cgroup.sh` and it will reassign memory for each service
+Or just check if the memory services need to be reconfigured with `rb_check_cgroups.sh`
 
 ## Authors
 
