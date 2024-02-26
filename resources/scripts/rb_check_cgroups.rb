@@ -4,7 +4,9 @@
 require 'socket'
 require 'chef'
 
+# Module to interact with Cgroup v2 in an easy way
 module RedBorder
+  # Module to check if cgroups need to be reassigned
   module Checker
     def self.check_memservices_cgroups
       Chef::Log::info("Memservices Check")
