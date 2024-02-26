@@ -9,7 +9,7 @@ module RedBorder
   # Module to check if cgroups need to be reassigned
   module Checker
     def self.check_memservices_cgroups
-      Chef::Log.info("Memservices Check")
+      Chef::Log.info('Memservices Check')
       active_memory_services.all? do |s|
         cgroup = `systemctl show -p ControlGroup #{s}`.gsub('ControlGroup=','').chomp
         s = s.delete("\",-").chomp
