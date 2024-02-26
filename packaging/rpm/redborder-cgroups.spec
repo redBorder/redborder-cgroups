@@ -44,7 +44,7 @@ systemctl enable redborder-cgroups
 %doc
 
 %changelog
-* Fri Feb 23 2024 - Luis Blanco <ljblanco@redborder.com>
+* Fri Feb 23 2024 - Luis Blanco <ljblanco@redborder.com> - 0.1.0-1
 - Ruby wrapper added, and unmangle shebangs
 * Tue Sep 28 2023 - Miguel Álvarez <malvarez@redborder.com> - 0.0.1-1
 - Initial spec version
