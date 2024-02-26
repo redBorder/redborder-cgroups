@@ -1,3 +1,5 @@
+%undefine __brp_mangle_shebangs
+
 Name:       redborder-cgroups
 Version: %{__version}
 Release: %{__release}%{?dist}
@@ -43,7 +45,7 @@ systemctl enable redborder-cgroups
 
 %changelog
 * Fri Feb 23 2024 - Luis Blanco <ljblanco@redborder.com>
-- Ruby wrapper added
+- Ruby wrapper added, and unmangle shebangs
 * Tue Sep 28 2023 - Miguel Álvarez <malvarez@redborder.com> - 0.0.1-1
 - Initial spec version
 
