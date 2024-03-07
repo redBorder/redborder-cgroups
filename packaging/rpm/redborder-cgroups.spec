@@ -1,6 +1,8 @@
+%undefine __brp_mangle_shebangs
+
 Name:       redborder-cgroups
-Version:    0.0.1
-Release:    1%{?dist}
+Version: %{__version}
+Release: %{__release}%{?dist}
 BuildArch:  noarch
 Summary:    redborder-cgroups package for configuring cgroup in redborder environments
 
@@ -28,6 +30,7 @@ install -m 0755 resources/scripts/* %{buildroot}/usr/lib/redborder/scripts/
 %pre
 
 %post
+/usr/lib/redborder/bin/rb_rubywrapper.sh -c
 systemctl daemon-reload
 systemctl enable redborder-cgroups
 
@@ -41,6 +44,8 @@ systemctl enable redborder-cgroups
 %doc
 
 %changelog
+* Fri Feb 23 2024 - Luis Blanco <ljblanco@redborder.com> - 0.1.0-1
+- Ruby wrapper added, and unmangle shebangs
 * Tue Sep 28 2023 - Miguel Álvarez <malvarez@redborder.com> - 0.0.1-1
 - Initial spec version
 
