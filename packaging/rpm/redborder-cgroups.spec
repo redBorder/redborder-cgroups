@@ -10,7 +10,7 @@ License:    GNU AGPLv3
 URL:        https://github.com/redBorder/redborder-cgroups
 Source0:    %{name}-%{version}.tar.gz
 
-Requires: jq
+Requires: jq redborder-common
 
 %description
 %{summary}
@@ -46,10 +46,11 @@ systemctl enable redborder-cgroups
 %doc
 
 %changelog
+* Tue Apr 23 2024 - Nils Verschaeve <nverschaeve@redborder.com>
+- added redborder-common dependency
 * Mon Mar 25 2024 - David Vanhoucke <dvanhoucke@redborder.com> - 0.1.1-1
 - added jq dependency
 * Fri Feb 23 2024 - Luis Blanco <ljblanco@redborder.com> - 0.1.0-1
 - Ruby wrapper added, and unmangle shebangs
 * Tue Sep 28 2023 - Miguel Álvarez <malvarez@redborder.com> - 0.0.1-1
 - Initial spec version
-
