@@ -10,7 +10,7 @@ License:    GNU AGPLv3
 URL:        https://github.com/redBorder/redborder-cgroups
 Source0:    %{name}-%{version}.tar.gz
 
-Requires: jq redborder-common
+Requires: jq
 
 %description
 %{summary}
@@ -32,7 +32,9 @@ install -m 0755 resources/scripts/* %{buildroot}/usr/lib/redborder/scripts/
 %pre
 
 %post
-/usr/lib/redborder/bin/rb_rubywrapper.sh -c
+if [ -x "/usr/lib/redborder/bin/rb_rubywrapper.sh" ]; then
+  /usr/lib/redborder/bin/rb_rubywrapper.sh -c
+fi
 systemctl daemon-reload
 systemctl enable redborder-cgroups
 
@@ -47,7 +49,7 @@ systemctl enable redborder-cgroups
 
 %changelog
 * Tue Apr 23 2024 - Nils Verschaeve <nverschaeve@redborder.com>
-- added redborder-common dependency
+- added ruby wrapper check
 * Mon Mar 25 2024 - David Vanhoucke <dvanhoucke@redborder.com> - 0.1.1-1
 - added jq dependency
 * Fri Feb 23 2024 - Luis Blanco <ljblanco@redborder.com> - 0.1.0-1
