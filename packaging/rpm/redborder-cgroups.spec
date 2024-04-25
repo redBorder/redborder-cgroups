@@ -32,7 +32,9 @@ install -m 0755 resources/scripts/* %{buildroot}/usr/lib/redborder/scripts/
 %pre
 
 %post
-/usr/lib/redborder/bin/rb_rubywrapper.sh -c
+if [ -x "/usr/lib/redborder/bin/rb_rubywrapper.sh" ]; then
+  /usr/lib/redborder/bin/rb_rubywrapper.sh -c
+fi
 systemctl daemon-reload
 systemctl enable redborder-cgroups
 
@@ -46,10 +48,11 @@ systemctl enable redborder-cgroups
 %doc
 
 %changelog
+* Tue Apr 23 2024 - Nils Verschaeve <nverschaeve@redborder.com>
+- added ruby wrapper check
 * Mon Mar 25 2024 - David Vanhoucke <dvanhoucke@redborder.com> - 0.1.1-1
 - added jq dependency
 * Fri Feb 23 2024 - Luis Blanco <ljblanco@redborder.com> - 0.1.0-1
 - Ruby wrapper added, and unmangle shebangs
 * Tue Sep 28 2023 - Miguel Álvarez <malvarez@redborder.com> - 0.0.1-1
 - Initial spec version
-
