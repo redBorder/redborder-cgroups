@@ -2,23 +2,21 @@
 # frozen_string_literal: true
 
 require 'socket'
-require 'chef'
 
 # Module to interact with Cgroup v2 in an easy way
 module RedBorder
   # Module to check if cgroups need to be reassigned
   module Checker
     def self.check_memservices_cgroups
-      Chef::Log.info('Memservices Check')
       active_memory_services.all? do |s|
         cgroup = `systemctl show -p ControlGroup #{s}`.gsub('ControlGroup=', '').chomp
         s = s.delete('\",-').chomp
         # every assigned cgroup should cointain redborder-....slice any else false
-        cgroup.include?("redborder-#{s}.slice") 
+        cgroup.include?("redborder-#{s}.slice")
       end
     end
 
-    def self.hostname 
+    def self.hostname
       `hostname -s`.strip
     end
 
