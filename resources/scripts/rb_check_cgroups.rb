@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'socket'
-
 # Module to interact with Cgroup v2 in an easy way
 module RedBorder
   # Module to check if cgroups need to be reassigned
