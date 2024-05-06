@@ -100,9 +100,11 @@ module RedBorder
   module Checker
     def self.check_units(cgroup, services)
       services.each do |srv, data|
-        next unless data['memory'] > 0
+        next unless data['memory'].positive?
+
         RedBorder::Logger.log("Checking cgroup for #{srv}")
         next if RedBorder::Cgroups.verify_unit(cgroup, srv)
+
         RedBorder::Logger.log("Assigning cgroup #{cgroup} for #{srv}")
         RedBorder::Cgroups.assign_cgroup(cgroup, srv)
         system("systemctl restart #{srv} > /dev/null 2>&1")
@@ -118,13 +120,21 @@ module RedBorder
       patch_cgroup_kernel(cgroup)
 
       services.each do |srv, data|
-        next unless (memory = data['memory']) > 0
+        next unless (memory = data['memory']).positive?
 
-        max_limit = data['max_limit']
         RedBorder::Logger.log("Reassign memory for #{srv}")
         system("systemctl stop #{srv} > /dev/null 2>&1")
 
-        RedBorder::Cgroups.assign_memory_limit(cgroup, srv, memory, max_limit)
+        # Wait until service stop
+        n = 0
+        while `systemctl status #{srv}`.include?('Active: active') do 
+          n = n + 1
+          return if n>20
+          RedBorder::Logger.log("Waiting to stop the service: #{srv}")
+          sleep 1
+        end
+
+        RedBorder::Cgroups.assign_memory_limit(cgroup, srv, memory, data['max_limit'])
         RedBorder::Cgroups.assign_io_limit(cgroup, srv)
 
         system("systemctl start #{srv} > /dev/null 2>&1")
@@ -137,12 +147,7 @@ module RedBorder
                  rescue StandardError
                    {}
                  end
-      services.each do |srv, data|
-        services.delete(srv) if data['memory'].to_i <= 0 ||
-                                !File.exist?(RedBorder::Cgroups.unit_file(srv))
-      end
-
-      services
+      services.select { |srv, data| data['memory'].to_i.positive? && File.exist?(RedBorder::Cgroups.unit_file(srv)) }
     end
   end
 
@@ -157,3 +162,4 @@ end
 services = RedBorder::Checker.conf || (exit 1)
 RedBorder::Checker.check_units('redborder', services)
 RedBorder::Checker.reassign_memory('redborder', services)
+# RedBorder::Checker.reassign_memory('redborder', services.select { |k, _v| k == 'chef-client' })
