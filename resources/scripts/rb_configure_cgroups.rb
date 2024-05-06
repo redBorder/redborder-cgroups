@@ -119,20 +119,12 @@ module RedBorder
     def self.reassign_memory(cgroup, services)
       patch_cgroup_kernel(cgroup)
 
+      services.delete('chef-client') # Is dangerous to stop this service
       services.each do |srv, data|
         next unless (memory = data['memory']).positive?
 
         RedBorder::Logger.log("Reassign memory for #{srv}")
         system("systemctl stop #{srv} > /dev/null 2>&1")
-
-        # Wait until service stop
-        n = 0
-        while `systemctl status #{srv}`.include?('Active: active') do 
-          n = n + 1
-          return if n>20
-          RedBorder::Logger.log("Waiting to stop the service: #{srv}")
-          sleep 1
-        end
 
         RedBorder::Cgroups.assign_memory_limit(cgroup, srv, memory, data['max_limit'])
         RedBorder::Cgroups.assign_io_limit(cgroup, srv)
