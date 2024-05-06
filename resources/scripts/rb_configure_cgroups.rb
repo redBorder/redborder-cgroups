@@ -139,7 +139,9 @@ module RedBorder
                  rescue StandardError
                    {}
                  end
-      services.select { |srv, data| data['memory'].to_i.positive? && File.exist?(RedBorder::Cgroups.unit_file(srv)) }
+      services.select do |srv, data|
+        data['memory'].to_i.positive? && File.exist?(RedBorder::Cgroups.unit_file(srv))
+      end
     end
   end
 
