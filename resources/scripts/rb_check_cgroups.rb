@@ -18,7 +18,7 @@ module RedBorder
       end
     end
 
-    def self.hostname 
+    def self.hostname
       `hostname -s`.strip
     end
 
