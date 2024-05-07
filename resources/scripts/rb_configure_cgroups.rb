@@ -119,7 +119,7 @@ module RedBorder
     def self.reassign_memory(cgroup, services)
       patch_cgroup_kernel(cgroup)
 
-      services.delete('chef-client') # Is dangerous to stop this service
+      # services.delete('chef-client') # Is dangerous to stop this service
       services.each do |srv, data|
         next unless (memory = data['memory']).positive?
 
