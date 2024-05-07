@@ -14,7 +14,7 @@ module RedBorder
         cgroup = `systemctl show -p ControlGroup #{s}`.gsub('ControlGroup=', '').chomp
         s = s.delete('\",-').chomp
         # every assigned cgroup should cointain redborder-....slice any else false
-        cgroup.include?("redborder-#{s}.slice") 
+        cgroup.include?("redborder-#{s}.slice")
       end
     end
 
