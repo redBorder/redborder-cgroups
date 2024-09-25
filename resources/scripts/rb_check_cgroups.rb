@@ -6,12 +6,15 @@ module RedBorder
   # Module to check if cgroups need to be reassigned
   module Checker
     def self.check_memservices_cgroups
-      active_memory_services.all? do |s|
+      is_config_ok = true
+      active_memory_services.each do |s|
+        next if s.include? "chef-client"
         cgroup = `systemctl show -p ControlGroup #{s}`.gsub('ControlGroup=', '').chomp
         s = s.delete('\",-').chomp
         # every assigned cgroup should cointain redborder-....slice any else false
-        cgroup.include?("redborder-#{s}.slice")
+        is_config_ok = false if !cgroup.include?("redborder-#{s}.slice")
       end
+      exit(1) unless is_config_ok
     end
 
     def self.hostname
