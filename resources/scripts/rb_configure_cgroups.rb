@@ -71,6 +71,7 @@ module RedBorder
     end
 
     def self.unit_file(srv)
+      srv = "rb-#{srv}" if srv == 'secor' || srv == 'secor-vault'
       d = `systemctl show #{srv} | grep FragmentPath | awk -F'=' '{print $2}'`
       d.strip
     end
@@ -100,6 +101,7 @@ module RedBorder
   module Checker
     def self.check_units(cgroup, services)
       services.each do |srv, data|
+        srv = "rb-#{srv}" if srv == 'secor' || srv == 'secor-vault'
         next unless data['memory'] > 0
         RedBorder::Logger.log("Checking cgroup for #{srv}")
         next if RedBorder::Cgroups.verify_unit(cgroup, srv)
@@ -118,6 +120,8 @@ module RedBorder
       patch_cgroup_kernel(cgroup)
 
       services.each do |srv, data|
+        srv = "rb-#{srv}" if srv == 'secor' || srv == 'secor-vault'
+
         next unless (memory = data['memory']) > 0
 
         max_limit = data['max_limit']
@@ -156,4 +160,4 @@ end
 
 services = RedBorder::Checker.conf || (exit 1)
 RedBorder::Checker.check_units('redborder', services)
-RedBorder::Checker.reassign_memory('redborder', services)
+RedBorder::Checker.reassign_memory('redborder', services)                                                                                           
