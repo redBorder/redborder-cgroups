@@ -22,7 +22,7 @@ module RedBorder
     end
 
     def self.memory_services
-      `knife node show #{hostname} -c /root/.chef/knife.rb -l -F json | grep -v "INFO:" | jq '.default.redborder.memory_services | keys[]'`.chomp.lines
+      `knife node show #{hostname} -c /root/.chef/knife.rb -l -F json | grep -v "INFO:" | jq '.default.redborder.memory_services // {} | keys[]'`.chomp.lines
     end
 
     def self.active_memory_services
