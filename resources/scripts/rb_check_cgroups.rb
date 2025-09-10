@@ -14,6 +14,13 @@ module RedBorder
         # every assigned cgroup should cointain redborder-....slice any else false
         is_config_ok = false if !cgroup.include?("redborder-#{s}.slice")
       end
+
+      controllers_file = '/sys/fs/cgroup/redborder.slice/cgroup.controllers'
+      if !File.exist?(controllers_file) || !File.read(controllers_file).include?('io')
+        puts 'Cgroup IO controller not enabled'
+        is_config_ok = false
+      end
+
       exit(1) unless is_config_ok
     end
 

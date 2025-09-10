@@ -39,13 +39,13 @@ module RedBorder
     def self.write_kernel_main_cgroup_io
       RedBorder::Logger.log('Enabling cgroup kernel IO')
       controller = "#{fetch_cgroup_sys}/cgroup.subtree_control"
-      system("echo +io > #{controller}")
+      system("grep -q io #{controller} || echo +io > #{controller}")
     end
 
     def self.write_kernel_sub_cgroup_io(name)
       RedBorder::Logger.log("Enabling sub-cgroup kernel IO for #{name}")
       controller = "#{fetch_cgroup_main(name)}/cgroup.subtree_control"
-      system("echo +io > #{controller}")
+      system("grep -q io #{controller} || echo +io > #{controller}")
     end
 
     def self.assign_memory_limit(name, srv, limit, max_limit)
@@ -61,7 +61,11 @@ module RedBorder
     def self.assign_io_limit(name, srv)
       limit = (srv == 'zookeeper') || (srv == 'postgresql') ? 1000 : 100
       io = "#{fetch_cgroup_path(name, srv)}/io.bfq.weight"
-      system("echo #{limit} > #{io}")
+      if File.exist?(io)
+        system("echo #{limit} > #{io}")
+      else
+        RedBorder::Logger.log("Skipping IO assignment for #{srv}, controller not enabled")
+      end
     end
 
     def self.verify_unit(name, srv)
